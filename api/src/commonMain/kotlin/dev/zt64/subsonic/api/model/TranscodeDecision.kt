@@ -1,0 +1,13 @@
+package dev.zt64.subsonic.api.model
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+public data class TranscodeDecision(
+    val canDirectPlay: Boolean,
+    val canTranscode: Boolean,
+    val errorReason: String,
+    val transcodeParams: String,
+    val sourceStream: StreamDetails,
+    val transcodeStream: StreamDetails,
+)
