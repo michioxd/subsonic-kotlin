@@ -18,4 +18,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "subsonic-kotlin"
 
-include("api", "client")
+include("subsonic-api", "subsonic-client")
