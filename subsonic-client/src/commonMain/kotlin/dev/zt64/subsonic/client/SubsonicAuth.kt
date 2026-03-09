@@ -36,8 +36,10 @@ public sealed interface SubsonicAuth {
             /**
              * Create a token from username and password
              *
+             * Token is computed as the MD5 of a randomly generated salt appended to the plain text password
+             *
              * @param username The username to authenticate with
-             * @param password The password (not stored)
+             * @param password The password in plain text (not stored)
              */
             public operator fun invoke(username: String, password: String): Token {
                 val salt = CharArray(SALT_LENGTH) { CHARS.random() }.concatToString()

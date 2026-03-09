@@ -81,11 +81,11 @@ public data class Index internal constructor(
 @Serializable
 public data class Indexes internal constructor(
     @SerialName("shortcut")
-    val shortcut: List<Artist>,
+    val shortcut: List<Artist> = emptyList(),
     @SerialName("child")
-    val child: List<Artist>,
+    val child: List<Artist> = emptyList(),
     @SerialName("index")
-    val index: List<Index>
+    val index: List<Index> = emptyList()
 )
 
 /**
@@ -98,4 +98,4 @@ public data class Indexes internal constructor(
 public data class Artists internal constructor(
     val ignoredArticles: String,
     val index: List<Index>
-)
+): List<Index> by index

@@ -11,12 +11,11 @@ import kotlin.uuid.Uuid
 private val apiUrl = env("SUBSONIC_API_URL")
 val username = env("SUBSONIC_USERNAME") ?: "abc"
 val password = env("SUBSONIC_PASSWORD") ?: "xyz"
-val email = "$username@abc.xyz"
 
 private val responses = mutableMapOf<String, String?>()
 
 @OptIn(ExperimentalUuidApi::class)
-private val client by lazy {
+val client by lazy {
     if (apiUrl != null) {
         SubsonicClient(
             baseUrl = apiUrl,

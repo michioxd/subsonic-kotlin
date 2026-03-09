@@ -30,12 +30,12 @@ public enum class PodcastStatus {
  *
  * @property id Unique channel identifier
  * @property title Channel title
- * @property url Channel RSS feed URL
+ * @property url Channel URL
  * @property description Channel description
  * @property coverArtId Cover art ID
- * @property originalImageUrl Original cover art URL from feed
+ * @property originalImageUrl Original cover art URL
  * @property status Channel status
- * @property errorMessage Error message if status is ERROR
+ * @property errorMessage Error message
  * @property episodes List of podcast episodes
  */
 @Serializable

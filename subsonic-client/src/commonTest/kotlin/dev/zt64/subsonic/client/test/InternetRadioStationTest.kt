@@ -34,12 +34,6 @@ class InternetRadioStationTest {
                       "name": "HBR1.com - Dream Factory",
                       "streamUrl": "http://ubuntu.hbr1.com:19800/ambient.aac",
                       "homepageUrl": "http://www.hbr1.com/"
-                    },
-                    {
-                      "id": "2",
-                      "name": "HBR1.com - I.D.M. Tranceponder",
-                      "streamUrl": "http://ubuntu.hbr1.com:19800/trance.ogg",
-                      "homepageUrl": "http://www.hbr1.com/"
                     }
                   ]
                 }

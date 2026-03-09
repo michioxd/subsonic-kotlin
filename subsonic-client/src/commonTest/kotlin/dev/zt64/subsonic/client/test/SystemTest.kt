@@ -50,7 +50,7 @@ class SystemTest {
             response = """
                 "license": {
                     "valid": true,
-                    "email": "$email",
+                    "email": "abc",
                     "licenseExpires": "2017-04-11T10:42:50.842Z",
                     "trialExpires": "2017-04-11T10:42:50.842Z"
                 }

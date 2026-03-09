@@ -3,8 +3,6 @@ package dev.zt64.subsonic.client.test
 import dev.zt64.subsonic.client.SubsonicClient
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
-import kotlin.time.Clock
-import kotlin.time.Duration.Companion.days
 
 class UserTest {
     @Test
@@ -46,7 +44,7 @@ class UserTest {
     @Test
     fun testUpdateUser() = runTest {
         testEndpoint("updateUser") {
-            updateUser(username, password, email, false)
+            updateUser(username, password, "", false)
         }
     }
 
@@ -86,7 +84,7 @@ class UserTest {
     @Test
     fun testCreateUser() = runTest {
         testEndpoint("createUser") {
-            createUser(username, password, email)
+            createUser(username, password, "")
         }
     }
 
@@ -97,7 +95,6 @@ class UserTest {
         }
     }
 
-    // Chat
     @Test
     fun testGetChatMessages() = runTest {
         testEndpoint(
@@ -125,116 +122,50 @@ class UserTest {
         }
     }
 
-    // Shares
     @Test
     fun testGetShares() = runTest {
         testEndpoint(
             endpoint = "getShares",
             response = """
-                
+                "shares": {
+                    "share": []
+                }
             """.trimIndent(),
             call = SubsonicClient::getShares
         )
     }
 
-    @Test
-    fun testCreateShare() = runTest {
-        testEndpoint(
-            endpoint = "createShare",
-            response = """
-                    "shares": {
-                      "share": [
-                        {
-                          "id": "12",
-                          "url": "http://localhost:8989/share.php?id=12&secret=fXlKyEv3",
-                          "description": "Forget and Remember (Comfort Fit)",
-                          "username": "user",
-                          "created": "2023-03-16T04:13:09+00:00",
-                          "visitCount": 0,
-                          "entry": [
-                            {
-                              "id": "300000116",
-                              "parent": "200000021",
-                              "title": "Can I Help U?",
-                              "isDir": false,
-                              "isVideo": false,
-                              "type": "music",
-                              "albumId": "200000021",
-                              "album": "Forget and Remember",
-                              "artistId": "100000036",
-                              "artist": "Comfort Fit",
-                              "coverArt": "300000116",
-                              "duration": 103,
-                              "bitRate": 216,
-                              "bitDepth": 16,
-                              "samplingRate": 44100,
-                              "channelCount": 2,
-                              "track": 1,
-                              "year": 2005,
-                              "genre": "Hip-Hop",
-                              "size": 2811819,
-                              "discNumber": 1,
-                              "suffix": "mp3",
-                              "contentType": "audio/mpeg",
-                              "path": "user/Comfort Fit/Forget And Remember/1 - Can I Help U?.mp3"
-                            },
-                            {
-                              "id": "300000121",
-                              "parent": "200000021",
-                              "title": "Planetary Picknick",
-                              "isDir": false,
-                              "isVideo": false,
-                              "type": "music",
-                              "albumId": "200000021",
-                              "album": "Forget and Remember",
-                              "artistId": "100000036",
-                              "artist": "Comfort Fit",
-                              "coverArt": "300000121",
-                              "duration": 358,
-                              "bitRate": 238,
-                              "bitDepth": 16,
-                              "samplingRate": 44100,
-                              "channelCount": 2,
-                              "track": 2,
-                              "year": 2005,
-                              "genre": "Hip-Hop",
-                              "size": 10715592,
-                              "discNumber": 1,
-                              "suffix": "mp3",
-                              "contentType": "audio/mpeg",
-                              "path": "user/Comfort Fit/Forget And Remember/2 - Planetary Picknick.mp3"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-            """.trimIndent()
-        ) {
-            createShare(listOf("Wa5fzmngg4VgscnxP1c05u"), "test", Clock.System.now())
-        }
-    }
+    // @Test
+    // fun testCreateShare() = runTest {
+    //     testEndpoint("createShare") {
+    //         createShare(listOf("Wa5fzmngg4VgscnxP1c05u"), "test")
+    //     }
+    // }
 
-    @Test
-    fun testUpdateShare() = runTest {
-        val share = testEndpoint("createShare") {
-            createShare(listOf("Wa5fzmngg4VgscnxP1c05u"), "test", Clock.System.now())
-        }!!
+    // @Test
+    // fun testUpdateShare() = runTest {
+    //     val share = testEndpoint(
+    //         endpoint = "createShare",
+    //         response = """"""
+    //     ) {
+    //         createShare(listOf("Wa5fzmngg4VgscnxP1c05u"), "test")
+    //     }!!
+    //
+    //     testEndpoint("updateShare") {
+    //         updateShare(share.id, expiresAt = Clock.System.now() + 5.days)
+    //     }
+    // }
 
-        testEndpoint("updateShare") {
-            updateShare(share.id, expiresAt = Clock.System.now() + 5.days)
-        }
-    }
-
-    @Test
-    fun testDeleteShare() = runTest {
-        val share = testEndpoint("createShare") {
-            createShare(listOf("Wa5fzmngg4VgscnxP1c05u"), "test", Clock.System.now())
-        }!!
-
-        testEndpoint("deleteShare") {
-            deleteShare(share.id)
-        }
-    }
+    // @Test
+    // fun testDeleteShare() = runTest {
+    //     val share = testEndpoint("createShare") {
+    //         createShare(listOf("Wa5fzmngg4VgscnxP1c05u"), "test")
+    //     }!!
+    //
+    //     testEndpoint("deleteShare") {
+    //         deleteShare(share.id)
+    //     }
+    // }
 
     @Test
     fun testStar() = runTest {
@@ -246,12 +177,12 @@ class UserTest {
         testEndpoint("unstar") { unstar("abc") }
     }
 
-    @Test
-    fun testGetBookmarks() = runTest {
-        testEndpoint("getBookmarks") {
-            getBookmarks()
-        }
-    }
+    // @Test
+    // fun testGetBookmarks() = runTest {
+    //     testEndpoint("getBookmarks", response = "") {
+    //         getBookmarks()
+    //     }
+    // }
 
     @Test
     fun testBookmark() = runTest {

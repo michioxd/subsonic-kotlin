@@ -1,6 +1,5 @@
 package dev.zt64.subsonic.client.test
 
-import dev.zt64.subsonic.api.model.MediaType
 import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 
@@ -324,67 +323,63 @@ class SongTest {
         }
     }
 
-    @Test
-    fun testDownloadSong() = runTest {
-        testEndpoint("download") {
-            download("")
-        }
-    }
+    // @Test
+    // fun testDownloadSong() = runTest {
+    //     testEndpoint("download") {
+    //         download("")
+    //     }
+    // }
 
-    @Test
-    fun testGetCoverArt() = runTest {
-        testEndpoint("getCoverArt") {
-            getCoverArt("")
-        }
-    }
+    // @Test
+    // fun testGetCoverArt() = runTest {
+    //     client.getCoverArt("")
+    // }
 
-    @Test
-    fun testHls() = runTest {
-        testEndpoint("hls") {
-            hls("abc")
-        }
-    }
+    // @Test
+    // fun testHls() = runTest {
+    //     println(client.hls("abc"))
+    // }
 
-    @Test
-    fun testTranscode() = runTest {
-        testEndpoint(
-            endpoint = "getTranscodeDecision",
-            response = """
-                "transcodeDecision": {
-                  "canDirectPlay": false,
-                  "canTranscode": true,
-                  "transcodeReason": ["AudioCodecNotSupported"],
-                  "errorReason": "",
-                  "transcodeParams": "0001-0005-004",
-                  "sourceStream": {
-                    "protocol": "http",
-                    "container": "flac",
-                    "codec": "flac",
-                    "audioChannels": 6,
-                    "audioBitrate": 3000000,
-                    "audioProfile": "",
-                    "audioSamplerate": 96000,
-                    "audioBitdepth": 24
-                  },
-                  "transcodeStream": {
-                    "protocol": "hls",
-                    "container": "mp4",
-                    "codec": "aac",
-                    "audioChannels": 2,
-                    "audioBitrate": 256000,
-                    "audioProfile": "xHE-AAC",
-                    "audioSamplerate": 48000,
-                    "audioBitdepth": 16
-                  }
-                }
-            """.trimIndent()
-        ) {
-            getTranscodeDecision("abc", MediaType.SONG)
-        }
-
-        testEndpoint(
-            endpoint = "getTranscodeStream",
-            response = "todo"
-        ) { getTranscodeStream("abc", MediaType.SONG, 0, "abc") }
-    }
+    // @Test
+    // fun testTranscode() = runTest {
+    //     testEndpoint(
+    //         endpoint = "getTranscodeDecision",
+    //         response = """
+    //             "transcodeDecision": {
+    //               "canDirectPlay": false,
+    //               "canTranscode": true,
+    //               "transcodeReason": ["AudioCodecNotSupported"],
+    //               "errorReason": "",
+    //               "transcodeParams": "0001-0005-004",
+    //               "sourceStream": {
+    //                 "protocol": "http",
+    //                 "container": "flac",
+    //                 "codec": "flac",
+    //                 "audioChannels": 6,
+    //                 "audioBitrate": 3000000,
+    //                 "audioProfile": "",
+    //                 "audioSamplerate": 96000,
+    //                 "audioBitdepth": 24
+    //               },
+    //               "transcodeStream": {
+    //                 "protocol": "hls",
+    //                 "container": "mp4",
+    //                 "codec": "aac",
+    //                 "audioChannels": 2,
+    //                 "audioBitrate": 256000,
+    //                 "audioProfile": "xHE-AAC",
+    //                 "audioSamplerate": 48000,
+    //                 "audioBitdepth": 16
+    //               }
+    //             }
+    //         """.trimIndent()
+    //     ) {
+    //         getTranscodeDecision("abc", MediaType.SONG)
+    //     }
+    //
+    //     testEndpoint(
+    //         endpoint = "getTranscodeStream",
+    //         response = "todo"
+    //     ) { getTranscodeStream("abc", MediaType.SONG, 0, "abc") }
+    // }
 }

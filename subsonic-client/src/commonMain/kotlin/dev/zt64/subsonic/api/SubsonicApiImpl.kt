@@ -776,7 +776,7 @@ internal class SubsonicApiImpl(
     }
 
     override suspend fun deleteInternetRadioStation(id: String) {
-        get("deleteRadioStation") {
+        get("deleteInternetRadioStation") {
             parameter("id", id)
         }
     }
