@@ -24,10 +24,12 @@ internal class SubsonicResponseSerializer<T : Any>(
         return if (status == "ok") {
             if (element.entries.size == 6) {
                 // There is a data field
+                val dataEntry = element.entries.last()
+                val dataKey = dataEntry.key
+                val dataValue = dataEntry.value
                 val obj = element.jsonObject.toMutableMap().apply {
-                    val dataEntry = entries.last()
-                    remove(dataEntry.key)
-                    this["data"] = dataEntry.value
+                    remove(dataKey)
+                    this["data"] = dataValue
                 }
 
                 decoder.json.decodeFromJsonElement(
