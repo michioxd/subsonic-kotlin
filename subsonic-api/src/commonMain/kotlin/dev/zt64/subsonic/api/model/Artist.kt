@@ -98,4 +98,4 @@ public data class Indexes internal constructor(
 public data class Artists internal constructor(
     val ignoredArticles: String,
     val index: List<Index>
-): List<Index> by index
+) : List<Index> by index
