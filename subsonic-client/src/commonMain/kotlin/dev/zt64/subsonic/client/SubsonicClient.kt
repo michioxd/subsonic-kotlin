@@ -21,9 +21,10 @@ private const val CLIENT_NAME = "subsonic-kotlin"
  */
 public class SubsonicClient(
     private val httpClient: HttpClient,
+    private val json: Json,
     private val baseUrl: String,
     private val params: Map<String, String>
-) : SubsonicApi by SubsonicApiImpl(httpClient, baseUrl, params) {
+) : SubsonicApi by SubsonicApiImpl(httpClient, json, baseUrl, params) {
     public companion object {
         /**
          * Create a SubsonicClient
@@ -54,13 +55,13 @@ public class SubsonicClient(
                 }
             }
 
+            val json = Json {
+                ignoreUnknownKeys = true
+            }
+
             val config: HttpClientConfig<*>.() -> Unit = {
                 install(ContentNegotiation) {
-                    json(
-                        Json {
-                            ignoreUnknownKeys = true
-                        }
-                    )
+                    json(json)
                 }
 
                 install(UserAgent) {
@@ -109,7 +110,7 @@ public class SubsonicClient(
                 }
             }
 
-            return SubsonicClient(httpClient, baseUrl, params)
+            return SubsonicClient(httpClient, json, baseUrl, params)
         }
     }
 }

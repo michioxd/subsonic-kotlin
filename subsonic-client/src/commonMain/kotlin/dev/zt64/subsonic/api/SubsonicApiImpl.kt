@@ -19,13 +19,10 @@ import kotlin.time.Instant
 
 internal class SubsonicApiImpl(
     private val httpClient: HttpClient,
+    private val json: Json,
     private val baseUrl: String,
     private val clientParams: Map<String, String>
 ) : SubsonicApi {
-    private val json = Json {
-        ignoreUnknownKeys = true
-    }
-
     private fun buildUrl(
         endpoint: String,
         params: Map<String, String?> = emptyMap(),
