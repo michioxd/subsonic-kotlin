@@ -34,7 +34,7 @@ public final class dev/zt64/subsonic/client/SubsonicAuth$Token$Companion {
 
 public final class dev/zt64/subsonic/client/SubsonicClient : dev/zt64/subsonic/api/SubsonicApi {
 	public static final field Companion Ldev/zt64/subsonic/client/SubsonicClient$Companion;
-	public fun <init> (Lio/ktor/client/HttpClient;Ljava/lang/String;Ljava/util/Map;)V
+	public fun <init> (Lio/ktor/client/HttpClient;Lkotlinx/serialization/json/Json;Ljava/lang/String;Ljava/util/Map;)V
 	public fun addChatMessage (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun changePassword (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun createBookmark (Ljava/lang/String;JLjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
