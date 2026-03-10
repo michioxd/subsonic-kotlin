@@ -6,7 +6,6 @@ import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.json.Json
 
@@ -59,55 +58,25 @@ public class SubsonicClient(
                 ignoreUnknownKeys = true
             }
 
-            val config: HttpClientConfig<*>.() -> Unit = {
-                install(ContentNegotiation) {
-                    json(json)
-                }
-
-                install(UserAgent) {
-                    agent = userAgent
-                }
-
+            val httpClientConfig: HttpClientConfig<*>.() -> Unit = {
+                install(ContentNegotiation) { json(json) }
+                install(UserAgent) { agent = userAgent }
                 install(HttpTimeout)
 
                 defaultRequest {
-                    contentType(ContentType.Application.Json)
-                    url(baseUrl)
-
+                    url("$baseUrl/rest/")
                     url {
-                        parameters.appendAll(
-                            parameters {
-                                set("f", "json")
-                                set("v", API_VERSION)
-                                set("c", client)
-
-                                when (auth) {
-                                    is SubsonicAuth.Key -> {
-                                        set("apiKey", auth.apiKey)
-                                    }
-
-                                    is SubsonicAuth.Token -> {
-                                        set("u", auth.username)
-                                        set("t", auth.token)
-                                        set("s", auth.salt)
-                                    }
-                                }
-                            }
-                        )
+                        params.forEach { (k, v) -> parameters[k] = v }
                     }
                 }
+
+                clientConfig()
             }
 
             val httpClient = if (engine != null) {
-                HttpClient(engine) {
-                    config()
-                    clientConfig()
-                }
+                HttpClient(engine, httpClientConfig)
             } else {
-                HttpClient {
-                    config()
-                    clientConfig()
-                }
+                HttpClient(httpClientConfig)
             }
 
             return SubsonicClient(httpClient, json, baseUrl, params)
