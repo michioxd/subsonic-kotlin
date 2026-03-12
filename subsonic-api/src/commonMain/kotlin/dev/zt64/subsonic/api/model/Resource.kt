@@ -1,6 +1,9 @@
 package dev.zt64.subsonic.api.model
 
+import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationException
+import kotlinx.serialization.json.*
 import kotlin.time.Instant
 
 /**
@@ -10,9 +13,20 @@ import kotlin.time.Instant
  * @property coverArtId ID of the cover art image
  * @property starredAt Timestamp when the resource was starred, if applicable
  */
-@Serializable
+@Serializable(ResourceSerializer::class)
 public sealed interface Resource {
     public val id: String
     public val coverArtId: String?
     public val starredAt: Instant?
+}
+
+internal object ResourceSerializer : JsonContentPolymorphicSerializer<Resource>(Resource::class) {
+    override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Resource> {
+        return when (element.jsonObject["mediaType"]!!.jsonPrimitive.content) {
+            "song" -> Song.serializer()
+            "artist" -> Artist.serializer()
+            "album" -> Album.serializer()
+            else -> throw SerializationException("Unknown media type: ${element.jsonObject["mediaType"]}")
+        }
+    }
 }
