@@ -7,7 +7,6 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.utils.io.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
@@ -62,7 +61,7 @@ internal class SubsonicApiImpl(
         return json.decodeFromJsonElement(serializer, res.body<JsonObject>()["subsonic-response"]!!)
     }
 
-    @Throws(SubsonicException::class, CancellationException::class)
+    // TODO: getBody and get can be simplified, I'm just not sure how yet
     private suspend inline fun <reified T : Any> getBody(
         endPoint: String,
         dataSerializer: KSerializer<T> = serializerFor<T>(json.serializersModule),
