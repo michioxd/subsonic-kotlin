@@ -55,6 +55,7 @@ public data class ArtistInfo internal constructor(
     val mediumImageUrl: String,
     val largeImageUrl: String,
     val lastFmUrl: String? = null,
+    @SerialName("similarArtist")
     val similarArtists: List<Artist> = emptyList()
 )
 
