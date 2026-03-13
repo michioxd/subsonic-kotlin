@@ -607,7 +607,7 @@ internal class SubsonicApiImpl(
         require(id.isNotEmpty())
 
         get("star") {
-            parameter("id", id.toList())
+            id.forEach { parameter("id", it) }
         }
     }
 
@@ -618,8 +618,8 @@ internal class SubsonicApiImpl(
     override suspend fun unstar(vararg id: String) {
         require(id.isNotEmpty())
 
-        return get("unstar") {
-            parameter("id", id.toList())
+        get("unstar") {
+            id.forEach { parameter("id", it) }
         }
     }
 
