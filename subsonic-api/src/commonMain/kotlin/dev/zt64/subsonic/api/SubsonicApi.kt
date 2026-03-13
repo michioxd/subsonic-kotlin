@@ -551,23 +551,23 @@ public interface SubsonicApi {
     /**
      * Star items by ID.
      *
-     * @param id The IDs of items to star
+     * @param ids The IDs of items to star
      */
-    public suspend fun star(vararg id: String)
+    public suspend fun star(vararg ids: String)
 
     /**
      * Star items.
      *
-     * @param item The items to star
+     * @param items The items to star
      */
-    public suspend fun star(vararg item: Resource)
+    public suspend fun star(vararg items: Resource)
 
     /**
      * Unstar items by ID.
      *
-     * @param id The IDs of items to unstar
+     * @param ids The IDs of items to unstar
      */
-    public suspend fun unstar(vararg id: String)
+    public suspend fun unstar(vararg ids: String)
 
     /**
      * Unstar items.

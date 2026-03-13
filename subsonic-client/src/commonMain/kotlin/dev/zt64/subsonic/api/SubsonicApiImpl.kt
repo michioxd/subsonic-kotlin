@@ -603,23 +603,23 @@ internal class SubsonicApiImpl(
         )
     }
 
-    override suspend fun star(vararg id: String) {
-        require(id.isNotEmpty())
+    override suspend fun star(vararg ids: String) {
+        require(ids.isNotEmpty())
 
         get("star") {
-            id.forEach { parameter("id", it) }
+            ids.forEach { parameter("id", it) }
         }
     }
 
-    override suspend fun star(vararg item: Resource) {
-        star(*item.map { it.id }.toTypedArray())
+    override suspend fun star(vararg items: Resource) {
+        star(*items.map { it.id }.toTypedArray())
     }
 
-    override suspend fun unstar(vararg id: String) {
-        require(id.isNotEmpty())
+    override suspend fun unstar(vararg ids: String) {
+        require(ids.isNotEmpty())
 
         get("unstar") {
-            id.forEach { parameter("id", it) }
+            ids.forEach { parameter("id", it) }
         }
     }
 
