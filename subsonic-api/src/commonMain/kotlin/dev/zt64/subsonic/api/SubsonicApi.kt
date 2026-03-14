@@ -307,7 +307,7 @@ public interface SubsonicApi {
      * @return List of songs
      */
     public suspend fun getSongs(
-        genre: Genre,
+        genre: String,
         count: Int = 10,
         offset: Int = 0,
         musicFolderId: String? = null

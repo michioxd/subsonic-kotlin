@@ -94,7 +94,7 @@ public final class dev/zt64/subsonic/client/SubsonicClient : dev/zt64/subsonic/a
 	public fun getSimilarSongs (Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getSimilarSongsID3 (Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getSong (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun getSongs (Ldev/zt64/subsonic/api/model/Genre;IILjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getSongs (Ljava/lang/String;IILjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getStarred (Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getStarredID3 (Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getStreamUrl (Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;

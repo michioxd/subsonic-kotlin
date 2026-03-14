@@ -387,7 +387,7 @@ internal class SubsonicApiImpl(
     }
 
     override suspend fun getSongs(
-        genre: Genre,
+        genre: String,
         count: Int,
         offset: Int,
         musicFolderId: String?
