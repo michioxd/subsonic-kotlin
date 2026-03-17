@@ -53,10 +53,16 @@ internal class SubsonicResponseSerializer<T : Any>(
                     JsonObject(obj)
                 )
             } else {
-                decoder.decodeSerializableValue(SubsonicResponse.Empty.serializer())
+                decoder.json.decodeFromJsonElement(
+                    SubsonicResponse.Empty.serializer(),
+                    element
+                )
             }
         } else {
-            decoder.decodeSerializableValue(SubsonicResponse.Error.serializer())
+            decoder.json.decodeFromJsonElement(
+                SubsonicResponse.Error.serializer(),
+                element
+            )
         }
     }
 
