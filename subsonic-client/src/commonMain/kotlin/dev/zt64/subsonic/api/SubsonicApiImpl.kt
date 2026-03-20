@@ -70,7 +70,7 @@ internal class SubsonicApiImpl(
     }
 
     private suspend fun get(endpoint: String, builder: HttpRequestBuilder.() -> Unit = {}) {
-        val res = execute(endpoint, builder).body<SubsonicResponse<Unit>>()
+        val res = execute(endpoint, builder).body<SubsonicResponse<Nothing>>()
         if (res is SubsonicResponse.Error) {
             throw SubsonicException(res.error.message, res.error.code)
         }
@@ -83,7 +83,7 @@ internal class SubsonicApiImpl(
     ): ByteArray {
         val res = execute(endpoint, builder)
         if (res.contentType() == ContentType.Application.Json) {
-            val parsed = json.decodeFromString<SubsonicResponse<Unit>>(res.bodyAsText())
+            val parsed = json.decodeFromString<SubsonicResponse<Nothing>>(res.bodyAsText())
             if (parsed is SubsonicResponse.Error) {
                 throw SubsonicException(parsed.error.message, parsed.error.code)
             }

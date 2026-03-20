@@ -1,8 +1,6 @@
 package dev.zt64.subsonic.api.model
 
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.StructureKind
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
@@ -24,49 +22,44 @@ internal class SubsonicResponseSerializer<T : Any>(
         val element = parent["subsonic-response"]!!.jsonObject
         val status = element.jsonObject["status"]!!.jsonPrimitive.content
 
-        return if (status == "ok") {
-            if (element.entries.size == 6) {
-                // There is a data field if there's 6 entries
-                // TODO: Find a safer way than relying on the size
-                val dataEntry = element.entries.last()
+        if (status != "ok") {
+            return decoder.json.decodeFromJsonElement<SubsonicResponse.Error>(element)
+        }
 
-                // List responses are either a bare array e.g. [...] like "getOpenSubsonicExtensions"
-                // or wrapped in a single-key object e.g. {"song": [...]};
-                // unwrap to a plain array so the element serializer receives what it expects
-                val dataValue = if (tSerializer.descriptor.kind == StructureKind.LIST) {
-                    when (val v = dataEntry.value) {
-                        is JsonArray -> v
-                        is JsonObject -> v.entries.singleOrNull()?.value ?: JsonArray(emptyList())
-                        else -> JsonArray(emptyList())
-                    }
-                } else {
-                    dataEntry.value
-                }
+        if (tSerializer.descriptor.serialName == "kotlin.Nothing") {
+            return decoder.json.decodeFromJsonElement<SubsonicResponse.Empty>(element)
+        }
 
-                val obj = element.jsonObject.toMutableMap().apply {
-                    remove(dataEntry.key)
-                    this["data"] = dataValue
-                }
+        // Presence of data can be inferred by T not being Nothing
+        val dataEntry = element.entries.last()
 
-                decoder.json.decodeFromJsonElement(
-                    SubsonicResponse.Success.serializer(tSerializer),
-                    JsonObject(obj)
-                )
-            } else {
-                decoder.json.decodeFromJsonElement(
-                    deserializer = SubsonicResponse.Empty.serializer(),
-                    element = element
-                )
+        // List responses are either a bare array e.g. [...] like "getOpenSubsonicExtensions"
+        // or wrapped in a single-key object e.g. {"song": [...]};
+        // unwrap to a plain array so the element serializer receives what it expects
+        val dataValue = if (tSerializer.descriptor.kind == StructureKind.LIST) {
+            when (val v = dataEntry.value) {
+                is JsonArray -> v
+                is JsonObject -> v.entries.singleOrNull()?.value ?: JsonArray(emptyList())
+                else -> JsonArray(emptyList())
             }
         } else {
-            decoder.json.decodeFromJsonElement(
-                deserializer = SubsonicResponse.Error.serializer(),
-                element = element
-            )
+            dataEntry.value
         }
+
+        val obj = element.jsonObject.toMutableMap().apply {
+            remove(dataEntry.key)
+            this["data"] = dataValue
+        }
+
+        return decoder.json.decodeFromJsonElement(
+            SubsonicResponse.Success.serializer(tSerializer),
+            JsonObject(obj)
+        )
     }
 
-    override fun serialize(encoder: Encoder, value: SubsonicResponse<T>) = error("Not needed")
+    override fun serialize(encoder: Encoder, value: SubsonicResponse<T>) {
+        throw SerializationException("Serialization is not supported")
+    }
 }
 
 /**
@@ -139,10 +132,10 @@ public sealed interface SubsonicResponse<out T : Any> {
         override val type: String,
         override val serverVersion: String,
         override val openSubsonic: Boolean,
-        public val error: Error
+        public val error: ErrorDetail
     ) : SubsonicResponse<Nothing> {
         @Serializable
-        public data class Error internal constructor(
+        public data class ErrorDetail internal constructor(
             val code: SubsonicErrorCode,
             val helpUrl: String? = null,
             val message: String
