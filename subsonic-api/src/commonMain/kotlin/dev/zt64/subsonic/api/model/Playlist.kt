@@ -42,7 +42,6 @@ public sealed interface SongCollection {
  * @property duration Total playlist duration
  * @property createdAt Timestamp when playlist was created
  * @property modifiedAt Timestamp when playlist was last modified
- * @property starredAt Timestamp when starred, or null if not starred
  * @property public Whether the playlist is public
  * @property readOnly Whether the playlist is read-only
  * @property allowedUsers List of usernames with access to the playlist
@@ -64,8 +63,6 @@ public data class Playlist internal constructor(
     val createdAt: Instant,
     @SerialName("changed")
     val modifiedAt: Instant,
-    @SerialName("starred")
-    override val starredAt: Instant? = null,
     val public: Boolean? = null,
     @SerialName("readonly")
     val readOnly: Boolean? = null,
@@ -73,4 +70,4 @@ public data class Playlist internal constructor(
     val validUntil: Instant? = null,
     @SerialName("entry")
     override val songs: List<Song> = emptyList()
-) : Resource, SongCollection
+) : SongCollection
