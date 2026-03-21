@@ -109,9 +109,11 @@ public interface SubsonicApi {
     /**
      * Get all configured music folders.
      *
+     * Use [getDirectory] to get a listing of the directory.
+     *
      * @return List of music folders
      */
-    public suspend fun getMusicFolders(): List<MusicFolder>
+    public suspend fun getDirectories(): List<MusicFolder>
 
     /**
      * Get an indexed structure of all artists.
@@ -122,11 +124,14 @@ public interface SubsonicApi {
     public suspend fun getIndexes(musicFolderId: String? = null): ArtistIndexes
 
     /**
-     * Get a listing of all files in a music directory.
+     * Get a listing of all files in a music directory. Not to be confused with [getDirectories]
+     * which gets a list of all folders available on the server.
      *
      * @param id The directory ID
+     *
+     * @see getDirectories
      */
-    public suspend fun getMusicDirectory(id: String)
+    public suspend fun getDirectory(id: String): Directory
 
     /**
      * Get all available genres in the music library.
@@ -327,7 +332,7 @@ public interface SubsonicApi {
      * @param musicFolder The music folder to filter by
      * @return Starred items
      */
-    public suspend fun getStarred(musicFolder: MusicFolder? = null): Starred
+    public suspend fun getStarred(musicFolder: Directory? = null): Starred
 
     /**
      * Get starred songs, albums, and artists using ID3 tags.
@@ -335,7 +340,7 @@ public interface SubsonicApi {
      * @param musicFolder The music folder to filter by
      * @return Starred items
      */
-    public suspend fun getStarredID3(musicFolder: MusicFolder? = null): Starred
+    public suspend fun getStarredID3(musicFolder: Directory? = null): Starred
 
     /**
      * Search for artists, albums, and songs.
@@ -554,7 +559,7 @@ public interface SubsonicApi {
      *
      * @param items The items to star
      */
-    public suspend fun star(vararg items: Resource)
+    public suspend fun star(vararg items: SubsonicResource)
 
     /**
      * Unstar items by ID.
@@ -568,7 +573,7 @@ public interface SubsonicApi {
      *
      * @param items The items to unstar
      */
-    public suspend fun unstar(vararg items: Resource)
+    public suspend fun unstar(vararg items: SubsonicResource)
 
     /**
      * Set the rating for a media file.
@@ -757,7 +762,7 @@ public interface SubsonicApi {
      *
      * @return List of bookmarks
      */
-    public suspend fun getBookmarks(): List<Bookmark<Resource>>
+    public suspend fun getBookmarks(): List<Bookmark<SubsonicResource>>
 
     /**
      * Create or update a bookmark.

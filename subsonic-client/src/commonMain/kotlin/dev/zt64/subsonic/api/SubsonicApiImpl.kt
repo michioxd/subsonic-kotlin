@@ -195,7 +195,7 @@ internal class SubsonicApiImpl(
         return getBody("getUsers")
     }
 
-    override suspend fun getMusicFolders(): List<MusicFolder> {
+    override suspend fun getDirectories(): List<MusicFolder> {
         return getBody("getMusicFolders")
     }
 
@@ -203,7 +203,7 @@ internal class SubsonicApiImpl(
         return getBody("getIndexes")
     }
 
-    override suspend fun getMusicDirectory(id: String) {
+    override suspend fun getDirectory(id: String): Directory {
         return getBody("getMusicDirectory") {
             parameter("id", id)
         }
@@ -378,13 +378,13 @@ internal class SubsonicApiImpl(
         return getBody("nowPlaying")
     }
 
-    override suspend fun getStarred(musicFolder: MusicFolder?): Starred {
+    override suspend fun getStarred(musicFolder: Directory?): Starred {
         return getBody("getStarred") {
             parameter("musicFolderId", musicFolder?.id)
         }
     }
 
-    override suspend fun getStarredID3(musicFolder: MusicFolder?): Starred {
+    override suspend fun getStarredID3(musicFolder: Directory?): Starred {
         return getBody("getStarred2") {
             parameter("musicFolderId", musicFolder?.id)
         }
@@ -599,7 +599,7 @@ internal class SubsonicApiImpl(
         }
     }
 
-    override suspend fun star(vararg items: Resource) {
+    override suspend fun star(vararg items: SubsonicResource) {
         star(*items.map { it.id }.toTypedArray())
     }
 
@@ -611,7 +611,7 @@ internal class SubsonicApiImpl(
         }
     }
 
-    override suspend fun unstar(vararg items: Resource) {
+    override suspend fun unstar(vararg items: SubsonicResource) {
         unstar(*items.map { it.id }.toTypedArray())
     }
 
@@ -778,7 +778,7 @@ internal class SubsonicApiImpl(
         }
     }
 
-    override suspend fun getBookmarks(): List<Bookmark<Resource>> {
+    override suspend fun getBookmarks(): List<Bookmark<SubsonicResource>> {
         return getBody("getBookmarks")
     }
 

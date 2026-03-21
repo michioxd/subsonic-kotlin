@@ -47,6 +47,8 @@ public abstract interface class dev/zt64/subsonic/api/SubsonicApi {
 	public static synthetic fun getCoverArt$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun getCoverArtUrl (Ljava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;
 	public static synthetic fun getCoverArtUrl$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Ljava/lang/String;
+	public abstract fun getDirectories (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getDirectory (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getGenres (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getIndexes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun getIndexes$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
@@ -55,8 +57,6 @@ public abstract interface class dev/zt64/subsonic/api/SubsonicApi {
 	public abstract fun getLyrics (Ldev/zt64/subsonic/api/model/Song;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getLyrics (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getLyrics (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun getMusicDirectory (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun getMusicFolders (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getNewestPodcasts (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun getNewestPodcasts$default (Ldev/zt64/subsonic/api/SubsonicApi;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun getNowPlaying (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -79,10 +79,10 @@ public abstract interface class dev/zt64/subsonic/api/SubsonicApi {
 	public abstract fun getSong (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getSongs (Ljava/lang/String;IILjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun getSongs$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;IILjava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public abstract fun getStarred (Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun getStarred$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public abstract fun getStarredID3 (Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun getStarredID3$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getStarred (Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getStarred$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public abstract fun getStarredID3 (Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getStarredID3$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun getStreamUrl (Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
 	public static synthetic fun getStreamUrl$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;ILjava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
 	public abstract fun getTopSongs (Ldev/zt64/subsonic/api/model/Artist;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -112,11 +112,11 @@ public abstract interface class dev/zt64/subsonic/api/SubsonicApi {
 	public abstract fun searchID3 (Ljava/lang/String;IIIIIILjava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun searchID3$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;IIIIIILjava/lang/Integer;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public abstract fun setRating (Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun star ([Ldev/zt64/subsonic/api/model/Resource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun star ([Ldev/zt64/subsonic/api/model/SubsonicResource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun star ([Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun startScan (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun tokenInfo (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun unstar ([Ldev/zt64/subsonic/api/model/Resource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun unstar ([Ldev/zt64/subsonic/api/model/SubsonicResource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun unstar ([Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun updateInternetRadioStation (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun updateInternetRadioStation$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
@@ -149,8 +149,8 @@ public final class dev/zt64/subsonic/api/SubsonicApi$DefaultImpls {
 	public static synthetic fun getSimilarSongs$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun getSimilarSongsID3$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun getSongs$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;IILjava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public static synthetic fun getStarred$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
-	public static synthetic fun getStarredID3$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getStarred$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun getStarredID3$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun getStreamUrl$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;ILjava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
 	public static synthetic fun getTopSongs$default (Ldev/zt64/subsonic/api/SubsonicApi;Ldev/zt64/subsonic/api/model/Artist;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun getTopSongs$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
@@ -168,26 +168,27 @@ public final class dev/zt64/subsonic/api/SubsonicApi$DefaultImpls {
 	public static synthetic fun updateUser$default (Ldev/zt64/subsonic/api/SubsonicApi;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Integer;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
-public final class dev/zt64/subsonic/api/model/Album : dev/zt64/subsonic/api/model/Resource, dev/zt64/subsonic/api/model/SongCollection {
+public final class dev/zt64/subsonic/api/model/Album : dev/zt64/subsonic/api/model/SongCollection, dev/zt64/subsonic/api/model/SubsonicResource {
 	public static final field Companion Ldev/zt64/subsonic/api/model/Album$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;ILkotlin/time/Duration;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILkotlin/time/Duration;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Integer;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
-	public final fun component10 ()Lkotlin/time/Instant;
+	public final fun component10-FghU774 ()Lkotlin/time/Duration;
 	public final fun component11 ()Lkotlin/time/Instant;
 	public final fun component12 ()Lkotlin/time/Instant;
-	public final fun component13 ()I
-	public final fun component14 ()Ljava/lang/Integer;
-	public final fun component15 ()Ljava/lang/String;
+	public final fun component13 ()Lkotlin/time/Instant;
+	public final fun component14 ()I
+	public final fun component15 ()Ljava/lang/Integer;
 	public final fun component16 ()Ljava/lang/String;
-	public final fun component17 ()Ljava/util/List;
+	public final fun component17 ()Ljava/lang/String;
+	public final fun component18 ()Ljava/util/List;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Ljava/lang/String;
 	public final fun component4 ()Ljava/lang/String;
 	public final fun component5 ()Ljava/lang/Integer;
 	public final fun component6 ()Ljava/lang/String;
 	public final fun component7 ()Ljava/lang/String;
-	public final fun component8 ()I
-	public final fun component9-FghU774 ()Lkotlin/time/Duration;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()I
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getArtistId ()Ljava/lang/String;
 	public final fun getArtistName ()Ljava/lang/String;
@@ -195,9 +196,10 @@ public final class dev/zt64/subsonic/api/model/Album : dev/zt64/subsonic/api/mod
 	public final fun getCreatedAt ()Lkotlin/time/Instant;
 	public fun getDuration-FghU774 ()Lkotlin/time/Duration;
 	public final fun getGenre ()Ljava/lang/String;
+	public final fun getGenres ()Ljava/util/List;
 	public fun getId ()Ljava/lang/String;
 	public final fun getLastPlayedAt ()Lkotlin/time/Instant;
-	public final fun getMusicBrainzId ()Ljava/lang/String;
+	public fun getMusicBrainzId ()Ljava/lang/String;
 	public fun getName ()Ljava/lang/String;
 	public final fun getPlayCount ()I
 	public fun getSongCount ()I
@@ -207,6 +209,7 @@ public final class dev/zt64/subsonic/api/model/Album : dev/zt64/subsonic/api/mod
 	public final fun getVersion ()Ljava/lang/String;
 	public final fun getYear ()Ljava/lang/Integer;
 	public fun hashCode ()I
+	public fun isStarred ()Z
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -396,7 +399,7 @@ public final class dev/zt64/subsonic/api/model/AlbumListType$Starred : dev/zt64/
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class dev/zt64/subsonic/api/model/Artist : dev/zt64/subsonic/api/model/Resource {
+public final class dev/zt64/subsonic/api/model/Artist : dev/zt64/subsonic/api/model/SubsonicResource {
 	public static final field Companion Ldev/zt64/subsonic/api/model/Artist$Companion;
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component10 ()Ljava/util/List;
@@ -406,7 +409,7 @@ public final class dev/zt64/subsonic/api/model/Artist : dev/zt64/subsonic/api/mo
 	public final fun component4 ()Ljava/lang/String;
 	public final fun component5 ()Ljava/lang/String;
 	public final fun component6 ()Lkotlin/time/Instant;
-	public final fun component7 ()I
+	public final fun component7 ()Ljava/lang/Integer;
 	public final fun component8 ()Ljava/lang/String;
 	public final fun component9 ()Ljava/lang/String;
 	public fun equals (Ljava/lang/Object;)Z
@@ -415,13 +418,14 @@ public final class dev/zt64/subsonic/api/model/Artist : dev/zt64/subsonic/api/mo
 	public final fun getArtistImageUrl ()Ljava/lang/String;
 	public fun getCoverArtId ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
-	public final fun getMusicBrainzId ()Ljava/lang/String;
+	public fun getMusicBrainzId ()Ljava/lang/String;
 	public final fun getName ()Ljava/lang/String;
 	public final fun getRoles ()Ljava/util/List;
 	public final fun getSortName ()Ljava/lang/String;
 	public fun getStarredAt ()Lkotlin/time/Instant;
-	public final fun getUserRating ()I
+	public final fun getUserRating ()Ljava/lang/Integer;
 	public fun hashCode ()I
+	public fun isStarred ()Z
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -437,6 +441,61 @@ public final synthetic class dev/zt64/subsonic/api/model/Artist$$serializer : ko
 }
 
 public final class dev/zt64/subsonic/api/model/Artist$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/zt64/subsonic/api/model/ArtistIndex {
+	public static final field Companion Ldev/zt64/subsonic/api/model/ArtistIndex$Companion;
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/util/List;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArtists ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class dev/zt64/subsonic/api/model/ArtistIndex$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ldev/zt64/subsonic/api/model/ArtistIndex$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/zt64/subsonic/api/model/ArtistIndex;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/zt64/subsonic/api/model/ArtistIndex;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/zt64/subsonic/api/model/ArtistIndex$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/zt64/subsonic/api/model/ArtistIndexes {
+	public static final field Companion Ldev/zt64/subsonic/api/model/ArtistIndexes$Companion;
+	public fun <init> ()V
+	public final fun component1 ()Ljava/util/List;
+	public final fun component2 ()Ljava/util/List;
+	public final fun component3 ()Ljava/util/List;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getChild ()Ljava/util/List;
+	public final fun getIndex ()Ljava/util/List;
+	public final fun getShortcut ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class dev/zt64/subsonic/api/model/ArtistIndexes$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ldev/zt64/subsonic/api/model/ArtistIndexes$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/zt64/subsonic/api/model/ArtistIndexes;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/zt64/subsonic/api/model/ArtistIndexes;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/zt64/subsonic/api/model/ArtistIndexes$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -478,40 +537,40 @@ public final class dev/zt64/subsonic/api/model/ArtistInfo$Companion {
 
 public final class dev/zt64/subsonic/api/model/Artists : java/util/List, kotlin/jvm/internal/markers/KMappedMarker {
 	public static final field Companion Ldev/zt64/subsonic/api/model/Artists$Companion;
-	public fun add (ILdev/zt64/subsonic/api/model/Index;)V
+	public fun add (ILdev/zt64/subsonic/api/model/ArtistIndex;)V
 	public synthetic fun add (ILjava/lang/Object;)V
-	public fun add (Ldev/zt64/subsonic/api/model/Index;)Z
+	public fun add (Ldev/zt64/subsonic/api/model/ArtistIndex;)Z
 	public synthetic fun add (Ljava/lang/Object;)Z
 	public fun addAll (ILjava/util/Collection;)Z
 	public fun addAll (Ljava/util/Collection;)Z
 	public fun clear ()V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/util/List;
-	public fun contains (Ldev/zt64/subsonic/api/model/Index;)Z
+	public fun contains (Ldev/zt64/subsonic/api/model/ArtistIndex;)Z
 	public final fun contains (Ljava/lang/Object;)Z
 	public fun containsAll (Ljava/util/Collection;)Z
 	public fun equals (Ljava/lang/Object;)Z
-	public fun get (I)Ldev/zt64/subsonic/api/model/Index;
+	public fun get (I)Ldev/zt64/subsonic/api/model/ArtistIndex;
 	public synthetic fun get (I)Ljava/lang/Object;
 	public final fun getIgnoredArticles ()Ljava/lang/String;
 	public final fun getIndex ()Ljava/util/List;
 	public fun getSize ()I
 	public fun hashCode ()I
-	public fun indexOf (Ldev/zt64/subsonic/api/model/Index;)I
+	public fun indexOf (Ldev/zt64/subsonic/api/model/ArtistIndex;)I
 	public final fun indexOf (Ljava/lang/Object;)I
 	public fun isEmpty ()Z
 	public fun iterator ()Ljava/util/Iterator;
-	public fun lastIndexOf (Ldev/zt64/subsonic/api/model/Index;)I
+	public fun lastIndexOf (Ldev/zt64/subsonic/api/model/ArtistIndex;)I
 	public final fun lastIndexOf (Ljava/lang/Object;)I
 	public fun listIterator ()Ljava/util/ListIterator;
 	public fun listIterator (I)Ljava/util/ListIterator;
-	public fun remove (I)Ldev/zt64/subsonic/api/model/Index;
+	public fun remove (I)Ldev/zt64/subsonic/api/model/ArtistIndex;
 	public synthetic fun remove (I)Ljava/lang/Object;
 	public fun remove (Ljava/lang/Object;)Z
 	public fun removeAll (Ljava/util/Collection;)Z
 	public fun replaceAll (Ljava/util/function/UnaryOperator;)V
 	public fun retainAll (Ljava/util/Collection;)Z
-	public fun set (ILdev/zt64/subsonic/api/model/Index;)Ldev/zt64/subsonic/api/model/Index;
+	public fun set (ILdev/zt64/subsonic/api/model/ArtistIndex;)Ldev/zt64/subsonic/api/model/ArtistIndex;
 	public synthetic fun set (ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun size ()I
 	public fun sort (Ljava/util/Comparator;)V
@@ -543,11 +602,11 @@ public final class dev/zt64/subsonic/api/model/Bookmark {
 	public final fun component3 ()Ljava/lang/String;
 	public final fun component4 ()Lkotlin/time/Instant;
 	public final fun component5 ()Lkotlin/time/Instant;
-	public final fun component6 ()Ldev/zt64/subsonic/api/model/Resource;
+	public final fun component6 ()Ldev/zt64/subsonic/api/model/SubsonicResource;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getComment ()Ljava/lang/String;
 	public final fun getCreatedAt ()Lkotlin/time/Instant;
-	public final fun getEntry ()Ldev/zt64/subsonic/api/model/Resource;
+	public final fun getEntry ()Ldev/zt64/subsonic/api/model/SubsonicResource;
 	public final fun getModifiedAt ()Lkotlin/time/Instant;
 	public final fun getPosition ()I
 	public final fun getUsername ()Ljava/lang/String;
@@ -626,6 +685,45 @@ public final class dev/zt64/subsonic/api/model/Contributor$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
+public final class dev/zt64/subsonic/api/model/Directory {
+	public static final field Companion Ldev/zt64/subsonic/api/model/Directory$Companion;
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Lkotlin/time/Instant;
+	public final fun component5 ()Ljava/lang/Integer;
+	public final fun component6 ()Ljava/lang/Float;
+	public final fun component7 ()I
+	public final fun component8 ()Ljava/util/List;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAverageRating ()Ljava/lang/Float;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getItems ()Ljava/util/List;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getParent ()Ljava/lang/String;
+	public final fun getPlayCount ()I
+	public final fun getStarredAt ()Lkotlin/time/Instant;
+	public final fun getUserRating ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public final fun isStarred ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final synthetic class dev/zt64/subsonic/api/model/Directory$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Ldev/zt64/subsonic/api/model/Directory$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/zt64/subsonic/api/model/Directory;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/zt64/subsonic/api/model/Directory;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/zt64/subsonic/api/model/Directory$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class dev/zt64/subsonic/api/model/Genre {
 	public static final field Companion Ldev/zt64/subsonic/api/model/Genre$Companion;
 	public final fun component1 ()Ljava/lang/String;
@@ -651,61 +749,6 @@ public final synthetic class dev/zt64/subsonic/api/model/Genre$$serializer : kot
 }
 
 public final class dev/zt64/subsonic/api/model/Genre$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/zt64/subsonic/api/model/Index {
-	public static final field Companion Ldev/zt64/subsonic/api/model/Index$Companion;
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Ljava/util/List;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getArtists ()Ljava/util/List;
-	public final fun getName ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final synthetic class dev/zt64/subsonic/api/model/Index$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Ldev/zt64/subsonic/api/model/Index$$serializer;
-	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/zt64/subsonic/api/model/Index;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/zt64/subsonic/api/model/Index;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/zt64/subsonic/api/model/Index$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/zt64/subsonic/api/model/Indexes {
-	public static final field Companion Ldev/zt64/subsonic/api/model/Indexes$Companion;
-	public fun <init> ()V
-	public final fun component1 ()Ljava/util/List;
-	public final fun component2 ()Ljava/util/List;
-	public final fun component3 ()Ljava/util/List;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getChild ()Ljava/util/List;
-	public final fun getIndex ()Ljava/util/List;
-	public final fun getShortcut ()Ljava/util/List;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
-}
-
-public final synthetic class dev/zt64/subsonic/api/model/Indexes$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Ldev/zt64/subsonic/api/model/Indexes$$serializer;
-	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ldev/zt64/subsonic/api/model/Indexes;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Ldev/zt64/subsonic/api/model/Indexes;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
-}
-
-public final class dev/zt64/subsonic/api/model/Indexes$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -1083,16 +1126,15 @@ public final class dev/zt64/subsonic/api/model/PlayQueue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class dev/zt64/subsonic/api/model/Playlist : dev/zt64/subsonic/api/model/Resource, dev/zt64/subsonic/api/model/SongCollection {
+public final class dev/zt64/subsonic/api/model/Playlist : dev/zt64/subsonic/api/model/SongCollection {
 	public static final field Companion Ldev/zt64/subsonic/api/model/Playlist$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IJLkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/time/Instant;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Lkotlin/time/Instant;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IJLkotlin/time/Instant;Lkotlin/time/Instant;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Lkotlin/time/Instant;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
-	public final fun component10 ()Lkotlin/time/Instant;
+	public final fun component10 ()Ljava/lang/Boolean;
 	public final fun component11 ()Ljava/lang/Boolean;
-	public final fun component12 ()Ljava/lang/Boolean;
-	public final fun component13 ()Ljava/util/List;
-	public final fun component14 ()Lkotlin/time/Instant;
-	public final fun component15 ()Ljava/util/List;
+	public final fun component12 ()Ljava/util/List;
+	public final fun component13 ()Lkotlin/time/Instant;
+	public final fun component14 ()Ljava/util/List;
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component3 ()Ljava/lang/String;
 	public final fun component4 ()Ljava/lang/String;
@@ -1116,7 +1158,6 @@ public final class dev/zt64/subsonic/api/model/Playlist : dev/zt64/subsonic/api/
 	public final fun getReadOnly ()Ljava/lang/Boolean;
 	public fun getSongCount ()I
 	public fun getSongs ()Ljava/util/List;
-	public fun getStarredAt ()Lkotlin/time/Instant;
 	public final fun getValidUntil ()Lkotlin/time/Instant;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -1177,7 +1218,7 @@ public final class dev/zt64/subsonic/api/model/PodcastChannel$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class dev/zt64/subsonic/api/model/PodcastEpisode : dev/zt64/subsonic/api/model/Resource {
+public final class dev/zt64/subsonic/api/model/PodcastEpisode : dev/zt64/subsonic/api/model/SubsonicResource {
 	public static final field Companion Ldev/zt64/subsonic/api/model/PodcastEpisode$Companion;
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/String;
@@ -1187,16 +1228,19 @@ public final class dev/zt64/subsonic/api/model/PodcastEpisode : dev/zt64/subsoni
 	public final fun component6 ()Ldev/zt64/subsonic/api/model/PodcastStatus;
 	public final fun component7 ()Lkotlin/time/Instant;
 	public final fun component8 ()Lkotlin/time/Instant;
+	public final fun component9 ()Ljava/lang/String;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getChannelId ()Ljava/lang/String;
 	public fun getCoverArtId ()Ljava/lang/String;
 	public final fun getDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
+	public fun getMusicBrainzId ()Ljava/lang/String;
 	public final fun getPublishDate ()Lkotlin/time/Instant;
 	public fun getStarredAt ()Lkotlin/time/Instant;
 	public final fun getStatus ()Ldev/zt64/subsonic/api/model/PodcastStatus;
 	public final fun getStreamId ()Ljava/lang/String;
 	public fun hashCode ()I
+	public fun isStarred ()Z
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -1228,17 +1272,6 @@ public final class dev/zt64/subsonic/api/model/PodcastStatus : java/lang/Enum {
 }
 
 public final class dev/zt64/subsonic/api/model/PodcastStatus$Companion {
-	public final fun serializer ()Lkotlinx/serialization/KSerializer;
-}
-
-public abstract interface class dev/zt64/subsonic/api/model/Resource {
-	public static final field Companion Ldev/zt64/subsonic/api/model/Resource$Companion;
-	public abstract fun getCoverArtId ()Ljava/lang/String;
-	public abstract fun getId ()Ljava/lang/String;
-	public abstract fun getStarredAt ()Lkotlin/time/Instant;
-}
-
-public final class dev/zt64/subsonic/api/model/Resource$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -1361,9 +1394,9 @@ public final class dev/zt64/subsonic/api/model/Share$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
-public final class dev/zt64/subsonic/api/model/Song : dev/zt64/subsonic/api/model/Resource {
+public final class dev/zt64/subsonic/api/model/Song : dev/zt64/subsonic/api/model/SubsonicResource {
 	public static final field Companion Ldev/zt64/subsonic/api/model/Song$Companion;
-	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/util/List;JLjava/lang/Integer;Ljava/util/List;ILjava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ldev/zt64/subsonic/api/model/Song$ReplayGain;Ldev/zt64/subsonic/api/model/Song$ExplicitStatus;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/util/List;JLjava/lang/Integer;Ljava/util/List;ILjava/lang/Integer;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ldev/zt64/subsonic/api/model/Song$ReplayGain;Ldev/zt64/subsonic/api/model/Song$ExplicitStatus;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Ljava/lang/String;Ljava/lang/String;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component10 ()Ljava/lang/Integer;
 	public final fun component11 ()Ljava/util/List;
@@ -1377,8 +1410,8 @@ public final class dev/zt64/subsonic/api/model/Song : dev/zt64/subsonic/api/mode
 	public final fun component19 ()I
 	public final fun component2 ()Ljava/lang/String;
 	public final fun component20 ()Ljava/lang/Integer;
-	public final fun component21 ()Ljava/lang/Integer;
-	public final fun component22 ()I
+	public final fun component21 ()Ljava/lang/Float;
+	public final fun component22 ()Ljava/lang/Integer;
 	public final fun component23 ()Ljava/lang/Integer;
 	public final fun component24 ()Ljava/lang/Integer;
 	public final fun component25 ()Ljava/lang/Integer;
@@ -1391,22 +1424,23 @@ public final class dev/zt64/subsonic/api/model/Song : dev/zt64/subsonic/api/mode
 	public final fun component31 ()Ljava/lang/String;
 	public final fun component32 ()Lkotlin/time/Instant;
 	public final fun component33 ()Ljava/lang/String;
+	public final fun component34 ()Ljava/lang/String;
 	public final fun component4 ()Ljava/lang/String;
 	public final fun component5 ()Ljava/lang/String;
 	public final fun component6 ()Ljava/lang/String;
 	public final fun component7 ()Ljava/lang/String;
 	public final fun component8 ()Ljava/lang/String;
 	public final fun component9 ()Ljava/lang/Integer;
-	public static synthetic fun copy-gu7LYKc$subsonic_api$default (Ldev/zt64/subsonic/api/model/Song;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/util/List;JLjava/lang/Integer;Ljava/util/List;ILjava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ldev/zt64/subsonic/api/model/Song$ReplayGain;Ldev/zt64/subsonic/api/model/Song$ExplicitStatus;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Ljava/lang/String;IILjava/lang/Object;)Ldev/zt64/subsonic/api/model/Song;
+	public static synthetic fun copy-xzfVt6M$subsonic_api$default (Ldev/zt64/subsonic/api/model/Song;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/List;Ljava/util/List;JLjava/lang/Integer;Ljava/util/List;ILjava/lang/Integer;Ljava/lang/Float;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ldev/zt64/subsonic/api/model/Song$ReplayGain;Ldev/zt64/subsonic/api/model/Song$ExplicitStatus;JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Instant;Ljava/lang/String;Ljava/lang/String;IILjava/lang/Object;)Ldev/zt64/subsonic/api/model/Song;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAlbumId ()Ljava/lang/String;
 	public final fun getAlbumTitle ()Ljava/lang/String;
 	public final fun getArtistId ()Ljava/lang/String;
 	public final fun getArtistName ()Ljava/lang/String;
 	public final fun getAudioChannelCount ()Ljava/lang/Integer;
-	public final fun getAverageRating ()Ljava/lang/Integer;
+	public final fun getAverageRating ()Ljava/lang/Float;
 	public final fun getBitDepth ()Ljava/lang/Integer;
-	public final fun getBitRate ()I
+	public final fun getBitRate ()Ljava/lang/Integer;
 	public final fun getBpm ()Ljava/lang/Integer;
 	public final fun getComment ()Ljava/lang/String;
 	public final fun getContributors ()Ljava/util/List;
@@ -1423,6 +1457,7 @@ public final class dev/zt64/subsonic/api/model/Song : dev/zt64/subsonic/api/mode
 	public final fun getIsrc ()Ljava/util/List;
 	public final fun getMimeType ()Ljava/lang/String;
 	public final fun getMoods ()Ljava/util/List;
+	public fun getMusicBrainzId ()Ljava/lang/String;
 	public final fun getParentId ()Ljava/lang/String;
 	public final fun getPlayCount ()I
 	public final fun getReplayGain ()Ldev/zt64/subsonic/api/model/Song$ReplayGain;
@@ -1433,6 +1468,7 @@ public final class dev/zt64/subsonic/api/model/Song : dev/zt64/subsonic/api/mode
 	public final fun getUserRating ()Ljava/lang/Integer;
 	public final fun getYear ()Ljava/lang/Integer;
 	public fun hashCode ()I
+	public fun isStarred ()Z
 	public fun toString ()Ljava/lang/String;
 }
 
@@ -1713,6 +1749,23 @@ public final synthetic class dev/zt64/subsonic/api/model/SubsonicExtension$$seri
 
 public final class dev/zt64/subsonic/api/model/SubsonicExtension$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class dev/zt64/subsonic/api/model/SubsonicResource {
+	public static final field Companion Ldev/zt64/subsonic/api/model/SubsonicResource$Companion;
+	public abstract fun getCoverArtId ()Ljava/lang/String;
+	public abstract fun getId ()Ljava/lang/String;
+	public abstract fun getMusicBrainzId ()Ljava/lang/String;
+	public abstract fun getStarredAt ()Lkotlin/time/Instant;
+	public fun isStarred ()Z
+}
+
+public final class dev/zt64/subsonic/api/model/SubsonicResource$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class dev/zt64/subsonic/api/model/SubsonicResource$DefaultImpls {
+	public static fun isStarred (Ldev/zt64/subsonic/api/model/SubsonicResource;)Z
 }
 
 public abstract interface class dev/zt64/subsonic/api/model/SubsonicResponse {
