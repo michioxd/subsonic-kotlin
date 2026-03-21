@@ -54,7 +54,7 @@ public data class Album internal constructor(
     val playCount: Int = 0,
     val userRating: Int? = null,
     val version: String? = null,
-    val musicBrainzId: String? = null,
+    override val musicBrainzId: String? = null,
     @SerialName("song")
     override val songs: List<Song> = emptyList()
 ) : SubsonicResource, SongCollection

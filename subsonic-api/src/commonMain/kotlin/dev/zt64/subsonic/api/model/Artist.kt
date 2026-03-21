@@ -15,7 +15,6 @@ import kotlin.time.Instant
  * @property starredAt Timestamp when starred, or null if not starred
  * @property userRating User rating (1-5), or -1 if not rated
  * @property sortName Alternate name for sorting
- * @property musicBrainzId MusicBrainz identifier
  * @property roles List of artist roles (e.g., composer, performer)
  * @property album List of albums by this artist
  */
@@ -31,7 +30,7 @@ public data class Artist internal constructor(
     override val starredAt: Instant? = null,
     val userRating: Int = -1,
     val sortName: String? = null,
-    val musicBrainzId: String? = null,
+    override val musicBrainzId: String? = null,
     val roles: List<String> = emptyList(),
     val album: List<Album> = emptyList()
 ) : SubsonicResource

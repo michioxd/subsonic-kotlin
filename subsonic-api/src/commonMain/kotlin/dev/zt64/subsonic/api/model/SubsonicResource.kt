@@ -12,12 +12,18 @@ import kotlin.time.Instant
  * @property id Unique identifier
  * @property coverArtId ID of the cover art image
  * @property starredAt Timestamp when the resource was starred, if applicable
+ * @property musicBrainzId MusicBrainz identifier
  */
 @Serializable(ResourceSerializer::class)
 public sealed interface SubsonicResource {
     public val id: String
     public val coverArtId: String?
     public val starredAt: Instant?
+    public val musicBrainzId: String?
+
+    /** Whether this resource has been starred */
+    public val isStarred: Boolean
+        get() = starredAt != null
 }
 
 internal object ResourceSerializer : JsonContentPolymorphicSerializer<SubsonicResource>(
