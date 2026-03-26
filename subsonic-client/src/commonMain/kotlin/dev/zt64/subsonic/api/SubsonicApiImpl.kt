@@ -70,7 +70,7 @@ internal class SubsonicApiImpl(
     }
 
     private suspend fun get(endpoint: String, builder: HttpRequestBuilder.() -> Unit = {}) {
-        val res = execute(endpoint, builder).body<SubsonicResponse<Unit>>()
+        val res = execute(endpoint, builder).body<SubsonicResponse<Nothing>>()
         if (res is SubsonicResponse.Error) {
             throw SubsonicException(res.error.message, res.error.code)
         }
@@ -83,7 +83,7 @@ internal class SubsonicApiImpl(
     ): ByteArray {
         val res = execute(endpoint, builder)
         if (res.contentType() == ContentType.Application.Json) {
-            val parsed = json.decodeFromString<SubsonicResponse<Unit>>(res.bodyAsText())
+            val parsed = json.decodeFromString<SubsonicResponse<Nothing>>(res.bodyAsText())
             if (parsed is SubsonicResponse.Error) {
                 throw SubsonicException(parsed.error.message, parsed.error.code)
             }
@@ -195,15 +195,15 @@ internal class SubsonicApiImpl(
         return getBody("getUsers")
     }
 
-    override suspend fun getMusicFolders(): List<MusicFolder> {
+    override suspend fun getDirectories(): List<MusicFolder> {
         return getBody("getMusicFolders")
     }
 
-    override suspend fun getIndexes(musicFolderId: String?): Indexes {
+    override suspend fun getIndexes(musicFolderId: String?): ArtistIndexes {
         return getBody("getIndexes")
     }
 
-    override suspend fun getMusicDirectory(id: String) {
+    override suspend fun getDirectory(id: String): Directory {
         return getBody("getMusicDirectory") {
             parameter("id", id)
         }
@@ -378,13 +378,13 @@ internal class SubsonicApiImpl(
         return getBody("nowPlaying")
     }
 
-    override suspend fun getStarred(musicFolder: MusicFolder?): Starred {
+    override suspend fun getStarred(musicFolder: Directory?): Starred {
         return getBody("getStarred") {
             parameter("musicFolderId", musicFolder?.id)
         }
     }
 
-    override suspend fun getStarredID3(musicFolder: MusicFolder?): Starred {
+    override suspend fun getStarredID3(musicFolder: Directory?): Starred {
         return getBody("getStarred2") {
             parameter("musicFolderId", musicFolder?.id)
         }
@@ -424,7 +424,7 @@ internal class SubsonicApiImpl(
         musicFolderId: Int?
     ): SearchResult {
         return search(
-            endpoint = "search",
+            endpoint = "search2",
             query = query,
             artistCount = artistCount,
             artistOffset = artistOffset,
@@ -447,7 +447,7 @@ internal class SubsonicApiImpl(
         musicFolderId: Int?
     ): SearchResult {
         return search(
-            endpoint = "search2",
+            endpoint = "search3",
             query = query,
             artistCount = artistCount,
             artistOffset = artistOffset,
@@ -599,7 +599,7 @@ internal class SubsonicApiImpl(
         }
     }
 
-    override suspend fun star(vararg items: Resource) {
+    override suspend fun star(vararg items: SubsonicResource) {
         star(*items.map { it.id }.toTypedArray())
     }
 
@@ -611,7 +611,7 @@ internal class SubsonicApiImpl(
         }
     }
 
-    override suspend fun unstar(vararg items: Resource) {
+    override suspend fun unstar(vararg items: SubsonicResource) {
         unstar(*items.map { it.id }.toTypedArray())
     }
 
@@ -778,7 +778,7 @@ internal class SubsonicApiImpl(
         }
     }
 
-    override suspend fun getBookmarks(): List<Bookmark<Resource>> {
+    override suspend fun getBookmarks(): List<Bookmark<SubsonicResource>> {
         return getBody("getBookmarks")
     }
 

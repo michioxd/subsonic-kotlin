@@ -1,5 +1,6 @@
 package dev.zt64.subsonic.api.model
 
+import dev.zt64.subsonic.api.model.serializer.GenresSerializer
 import dev.zt64.subsonic.api.model.serializer.SubsonicDurationSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -16,6 +17,7 @@ import kotlin.time.Instant
  * @property year Release year
  * @property coverArtId Cover art ID
  * @property genre Album genre
+ * @property genres List of genres
  * @property songCount Number of songs in the album
  * @property duration Total album duration
  * @property createdAt Timestamp when added to library
@@ -38,9 +40,11 @@ public data class Album internal constructor(
     @SerialName("coverArt")
     override val coverArtId: String,
     val genre: String? = null,
+    @Serializable(GenresSerializer::class)
+    val genres: List<String> = emptyList(),
     override val songCount: Int,
     @Serializable(SubsonicDurationSerializer::class)
-    override val duration: Duration,
+    override val duration: Duration? = null,
     @SerialName("created")
     val createdAt: Instant,
     @SerialName("starred")
@@ -50,10 +54,10 @@ public data class Album internal constructor(
     val playCount: Int = 0,
     val userRating: Int? = null,
     val version: String? = null,
-    val musicBrainzId: String? = null,
+    override val musicBrainzId: String? = null,
     @SerialName("song")
     override val songs: List<Song> = emptyList()
-) : Resource, SongCollection
+) : SubsonicResource, SongCollection
 
 /**
  * Detailed album information from Last.fm
@@ -83,27 +87,35 @@ public data class AlbumInfo(
 @Serializable
 public sealed class AlbumListType(public val value: String) {
     /** Random albums */
+    @Serializable
     public data object Random : AlbumListType("random")
 
     /** Newest albums */
+    @Serializable
     public data object Newest : AlbumListType("newest")
 
     /** Highest rated albums */
+    @Serializable
     public data object Highest : AlbumListType("highest")
 
     /** Most frequently played albums */
+    @Serializable
     public data object Frequent : AlbumListType("frequent")
 
     /** Recently played albums */
+    @Serializable
     public data object Recent : AlbumListType("recent")
 
     /** Starred albums */
+    @Serializable
     public data object Starred : AlbumListType("starred")
 
     /** Alphabetically sorted by album name */
+    @Serializable
     public data object AlphabeticalByName : AlbumListType("alphabeticalByName")
 
     /** Alphabetically sorted by artist name */
+    @Serializable
     public data object AlphabeticalByArtist : AlbumListType("alphabeticalByArtist")
 
     /**

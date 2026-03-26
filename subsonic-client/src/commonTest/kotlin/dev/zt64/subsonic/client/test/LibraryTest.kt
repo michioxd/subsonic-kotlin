@@ -24,7 +24,7 @@ class LibraryTest {
                 }
             """.trimIndent()
         ) {
-            getMusicFolders()
+            getDirectories()
         }
     }
 

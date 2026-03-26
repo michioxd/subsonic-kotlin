@@ -70,6 +70,8 @@ public final class dev/zt64/subsonic/client/SubsonicClient : dev/zt64/subsonic/a
 	public fun getChatMessages (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getCoverArt (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getCoverArtUrl (Ljava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;
+	public fun getDirectories (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getDirectory (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getGenres (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getIndexes (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getInternetRadioStations (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -77,8 +79,6 @@ public final class dev/zt64/subsonic/client/SubsonicClient : dev/zt64/subsonic/a
 	public fun getLyrics (Ldev/zt64/subsonic/api/model/Song;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getLyrics (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getLyrics (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun getMusicDirectory (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun getMusicFolders (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getNewestPodcasts (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getNowPlaying (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getOpenSubsonicExtensions (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -95,8 +95,8 @@ public final class dev/zt64/subsonic/client/SubsonicClient : dev/zt64/subsonic/a
 	public fun getSimilarSongsID3 (Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getSong (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getSongs (Ljava/lang/String;IILjava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun getStarred (Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun getStarredID3 (Ldev/zt64/subsonic/api/model/MusicFolder;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getStarred (Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getStarredID3 (Ldev/zt64/subsonic/api/model/Directory;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getStreamUrl (Ljava/lang/String;ILjava/lang/String;)Ljava/lang/String;
 	public fun getTopSongs (Ldev/zt64/subsonic/api/model/Artist;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun getTopSongs (Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -115,11 +115,11 @@ public final class dev/zt64/subsonic/client/SubsonicClient : dev/zt64/subsonic/a
 	public fun search (Ljava/lang/String;IIIIIILjava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun searchID3 (Ljava/lang/String;IIIIIILjava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun setRating (Ljava/lang/String;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun star ([Ldev/zt64/subsonic/api/model/Resource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun star ([Ldev/zt64/subsonic/api/model/SubsonicResource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun star ([Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun startScan (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun tokenInfo (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public fun unstar ([Ldev/zt64/subsonic/api/model/Resource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun unstar ([Ldev/zt64/subsonic/api/model/SubsonicResource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun unstar ([Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun updateInternetRadioStation (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun updatePlaylist (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

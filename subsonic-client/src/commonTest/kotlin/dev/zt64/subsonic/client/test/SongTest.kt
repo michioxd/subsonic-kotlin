@@ -114,7 +114,8 @@ class SongTest {
                     "trackPeak": 9.2,
                     "albumPeak": 9,
                     "baseGain": 0
-                  }
+                  },
+                  "explicitStatus": ""
                 }  
             """.trimIndent()
         ) { getSong("082f435a363c32c57d5edb6a678a28d4") }
